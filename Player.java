@@ -3,13 +3,13 @@ public class Player
 {
     private String name;
     private Room currentRoom;
-    private Exit knownExits;
+   // private Exit knownExits;
     
     public Player(String name)
     {
         this.name = name;
         this.currentRoom = null;
-        this.knownExits = null;
+       // this.knownExits = null;
     }
     
     public void setRoom(Room r)
@@ -56,6 +56,10 @@ public class Player
                     
                     
                     this.currentRoom.removePlayer();
+                    
+                    
+                    this.currentRoom.takeExit(line);
+                    
                     //update** I think that we have to use the takeExit from the Room class in order to put the player into a new room. 
 
                    //possibly use this .getRoomInADirection(line).addPlayer(this);

@@ -43,7 +43,7 @@ public class Room
         {
             if(this.theExits.get(i).getDirectionStringLeadingAwayFromRoom(this).equals(direction))
             {
-                
+                addPlayer(currentPlayer);
             }
         }
     }
