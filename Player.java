@@ -53,10 +53,12 @@ public class Player
                 //so line holds something like "north"
                 if(this.currentRoom.hasExit(line))
                 {
-                    //update not sure how to call the getRoomInADirection function without an exit.
+                    
                     
                     this.currentRoom.removePlayer();
-                    this.currentRoom.hasExit(line).getRoomInADirection(line).addPlayer(this);
+                    //update** I think that we have to use the takeExit from the Room class in order to put the player into a new room. 
+
+                   //possibly use this .getRoomInADirection(line).addPlayer(this);
                     //take the exit - add player to a new room that matches the exit taken 
                     //remove player from old room.
                     //***possibly switch first 2
