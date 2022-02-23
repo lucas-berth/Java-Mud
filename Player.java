@@ -55,8 +55,8 @@ public class Player
                 {
                     
                     
-                    this.currentRoom.removePlayer();
-                    
+                    //this.currentRoom.removePlayer();
+
                     
                     this.currentRoom.takeExit(line);
                     
@@ -68,7 +68,8 @@ public class Player
                     //***possibly switch first 2
                     //lastly just do a lookAround
                     
-                    this.lookAround();
+                    //this.lookAround();
+                    
                     
                     
                     

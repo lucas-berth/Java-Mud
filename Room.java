@@ -43,7 +43,16 @@ public class Room
         {
             if(this.theExits.get(i).getDirectionStringLeadingAwayFromRoom(this).equals(direction))
             {
+                //not sure what the put here but pretty sure we have to use it 
+                //addPlayer(currentPlayer);
+                //currentPlayer.setRoom(this);
+                //addPlayer(currentPlayer);
+                
+                this.removePlayer();
+                currentPlayer.setRoom(getRoomInADirection(direction));
                 addPlayer(currentPlayer);
+
+                //theExits.get(i).getRoomInADirection(direction).addPlayer(currentPlayer);
             }
         }
     }
