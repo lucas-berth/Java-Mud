@@ -49,6 +49,9 @@ public class Room
                 //addPlayer(currentPlayer);
                 
                 this.removePlayer();
+                //need to get the exit we want to take and call this function
+                //final update ** could not find a way to call this function in order to get the room to set
+                //other than that I think it would be close to working. 
                 currentPlayer.setRoom(getRoomInADirection(direction));
                 addPlayer(currentPlayer);
 
