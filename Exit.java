@@ -17,6 +17,22 @@ public class Exit
         this.destination2.addExit(this);
     }
 
+    public void travelInDirection(String direction, Room fromRoom, Player thePlayer)
+    {
+        if(direction.equals(directionLeadingToDest1))
+        {
+            thePlayer.setRoom(this.destination1);
+            fromRoom.removePlayer();
+            this.destination1.addPlayer(thePlayer);
+        }
+        else if(direction.equals(directionLeadingToDest2))
+        {
+            thePlayer.setRoom(this.destination2);
+            fromRoom.removePlayer();
+            this.destination2.addPlayer(thePlayer);
+        }
+    }
+
     public Room getRoomInADirection(String direction)
     {
         //this assumes that direction is a legal direction for this room 

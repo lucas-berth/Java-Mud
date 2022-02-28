@@ -5,27 +5,42 @@ public class Room
     private ArrayList<Exit> theExits;
     private String name;
     private Player currentPlayer;
+    private ArrayList<Monster> theMonsters;
     
     public Room(String name)
     {
         this.name = name;
         this.theExits = new ArrayList<Exit>();
+        this.theMonsters = new ArrayList<Monster>();
         this.currentPlayer = null;
+        
     }
     
     public void display()
     {
         System.out.println("Room: " + this.name);
         System.out.println("Also Here: ");
+        String alsoHereOutput = "";
         if(this.currentPlayer != null)
         {
-            System.out.println(this.currentPlayer.getName());
+            alsoHereOutput = this.currentPlayer.getName();
         }
-        else
+
+        //what monsters are in this room???
+        for(int i = 0; i < this.theMonsters.size(); i++)
         {
-            System.out.println("");
+            if(alsoHereOutput.length() > 0)
+            {
+                alsoHereOutput = alsoHereOutput + ", " + this.theMonsters.get(i).getName();
+            }
+            else
+            {
+                alsoHereOutput = this.theMonsters.get(i).getName();
+            }
         }
-        
+
+
+        System.out.println(alsoHereOutput);
         System.out.println("Obvious Exits: " );
         String exitDirections = "";
         for(int i = 0; i < this.theExits.size(); i++)
@@ -34,28 +49,19 @@ public class Room
             exitDirections = exitDirections + 
                 this.theExits.get(i).getDirectionStringLeadingAwayFromRoom(this) + " ";
         }
-        System.out.println(exitDirections);
+       System.out.println(exitDirections);
     }
     
     public void takeExit(String direction)
     {
+        Exit temp;
         for(int i = 0; i < this.theExits.size(); i++)
         {
-            if(this.theExits.get(i).getDirectionStringLeadingAwayFromRoom(this).equals(direction))
+            temp = this.theExits.get(i);
+            if(temp.getDirectionStringLeadingAwayFromRoom(this).equals(direction))
             {
-                //not sure what the put here but pretty sure we have to use it 
-                //addPlayer(currentPlayer);
-                //currentPlayer.setRoom(this);
-                //addPlayer(currentPlayer);
-                
-                this.removePlayer();
-                //need to get the exit we want to take and call this function
-                //final update ** could not find a way to call this function in order to get the room to set
-                //other than that I think it would be close to working. 
-                currentPlayer.setRoom(getRoomInADirection(direction));
-                addPlayer(currentPlayer);
-
-                //theExits.get(i).getRoomInADirection(direction).addPlayer(currentPlayer);
+                temp.travelInDirection(direction, this, this.currentPlayer);
+                return;
             }
         }
     }
@@ -76,6 +82,12 @@ public class Room
     {
         this.currentPlayer = p;
         p.setRoom(this);
+    }
+
+    void addMonster(Monster m)
+    {
+        this.theMonsters.add(m);
+        m.setRoom(this);
     }
     
     public Player getPlayer()

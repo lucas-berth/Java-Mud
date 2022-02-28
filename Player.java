@@ -1,30 +1,20 @@
 import java.util.Scanner;
-public class Player
+public class Player extends Inhabitant
 {
-    private String name;
-    private Room currentRoom;
-   // private Exit knownExits;
-    
     public Player(String name)
     {
-        this.name = name;
-        this.currentRoom = null;
-       // this.knownExits = null;
+        super(name); //must be the first line in the constructor if we choose to use super
+       
     }
+
+    
     
     public void setRoom(Room r)
     {
         this.currentRoom = r;
         
     }
-    /*
     
-    public void setExits(Exit e)
-    {
-        this.currentRoom.hasExit();
-        //start here 
-    }
-    */
     
     public void play()
     {
@@ -41,6 +31,19 @@ public class Player
             {
                 this.lookAround();
             }
+            else if(line.equals("throw"))
+            {
+                System.out.println("Who do you want to throw? ");
+                String who = input.nextLine();
+                System.out.println("Where do you want to throw " + who + "? ");
+                String where = input.nextLine();
+                System.out.println("About to throw..." + who + " through the exit to the: " + where + "!!!");
+                //start here for HW 
+                
+
+
+            }
+
             else if(line.equals("exit"))
             {
                 System.out.println("Goodbye!!!");
@@ -53,32 +56,9 @@ public class Player
                 //so line holds something like "north"
                 if(this.currentRoom.hasExit(line))
                 {
-                    
-                    
-                    //this.currentRoom.removePlayer();
-
-                    
                     this.currentRoom.takeExit(line);
+                    this.lookAround();
                     
-                    //update** I think that we have to use the takeExit from the Room class in order to put the player into a new room. 
-
-                   //possibly use this .getRoomInADirection(line).addPlayer(this);
-                    //take the exit - add player to a new room that matches the exit taken 
-                    //remove player from old room.
-                    //***possibly switch first 2
-                    //lastly just do a lookAround
-                    
-                    //this.lookAround();
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    //take that exit
-                    //write the code to take this exit and ensure the player ends up 
-                    //in the right place.
                 }
                 else
                 {
