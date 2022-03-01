@@ -8,6 +8,7 @@ public class Main
 	{
 	    ArrayList<Room> theRooms = new ArrayList<Room>();
 	    ArrayList<Exit> theExits = new ArrayList<Exit>();
+		ArrayList<Monster> theMonsters = new ArrayList<Monster>();
 	    Main.buildMap(theRooms, theExits);
 	    Player thePlayer = new Player("Lucas");
 		Monster theRat = new Monster("rat");

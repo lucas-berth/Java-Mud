@@ -4,6 +4,7 @@ public class Exit
     private Room destination2;
     private String directionLeadingToDest1;
     private String directionLeadingToDest2;
+    //private Monster theMonsters;
     
     public Exit(Room destination1, String directionLeadingToDest1, 
                 Room destination2, String directionLeadingToDest2)
@@ -15,6 +16,7 @@ public class Exit
         this.directionLeadingToDest2 = directionLeadingToDest2;
         this.destination1.addExit(this);
         this.destination2.addExit(this);
+        
     }
 
     public void travelInDirection(String direction, Room fromRoom, Player thePlayer)
@@ -30,6 +32,22 @@ public class Exit
             thePlayer.setRoom(this.destination2);
             fromRoom.removePlayer();
             this.destination2.addPlayer(thePlayer);
+        }
+    }
+    //same thing as above except this is used to move the monster
+    public void travelMonster(String direction, Room fromRoom, Monster theMonsters)
+    {
+        if(direction.equals(directionLeadingToDest1))
+        {
+            theMonsters.setRoom(this.destination1);
+            fromRoom.removeMonster();
+            this.destination1.addMonster(theMonsters);
+        }
+        else if(direction.equals(directionLeadingToDest2))
+        {
+            theMonsters.setRoom(this.destination2);
+            fromRoom.removeMonster();
+            this.destination2.addMonster(theMonsters);
         }
     }
 

@@ -6,15 +6,6 @@ public class Player extends Inhabitant
         super(name); //must be the first line in the constructor if we choose to use super
        
     }
-
-    
-    
-    public void setRoom(Room r)
-    {
-        this.currentRoom = r;
-        
-    }
-    
     
     public void play()
     {
@@ -37,11 +28,27 @@ public class Player extends Inhabitant
                 String who = input.nextLine();
                 System.out.println("Where do you want to throw " + who + "? ");
                 String where = input.nextLine();
-                System.out.println("About to throw..." + who + " through the exit to the: " + where + "!!!");
-                //start here for HW 
+                if(currentRoom.hasExit(where) == true)
+                {
+                    Monster temp = currentRoom.checkForMonster(who);
+                    //System.out.println(temp); test to see if a monster is getting passed
+                    if(temp != null)
+                    {
+                        currentRoom.throwMonster(where);
+                        this.lookAround();
+                        System.out.println("About to throw..." + who + " through the exit to the: " + where + "!!!");
+                    }
+                    else
+                    {
+                        System.out.println("No Monsters Here by that name!!!!");
+                    }
+                }
                 
-
-
+                
+                
+                
+               
+                
             }
 
             else if(line.equals("exit"))

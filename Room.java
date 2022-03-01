@@ -11,7 +11,9 @@ public class Room
     {
         this.name = name;
         this.theExits = new ArrayList<Exit>();
+        //Monster test1 = new Monster("test1");
         this.theMonsters = new ArrayList<Monster>();
+        //this.theMonsters.add(test1);
         this.currentPlayer = null;
         
     }
@@ -65,7 +67,47 @@ public class Room
             }
         }
     }
-    
+
+    public void throwMonster(String direction)
+    {
+        Exit temp;
+        Monster mtemp;
+       
+        
+        for(int i = 0; i < this.theExits.size(); i++)
+        {
+            temp = this.theExits.get(i);
+            if(temp.getDirectionStringLeadingAwayFromRoom(this).equals(direction))
+            {
+                for(int k = 0; k < this.theMonsters.size(); k++)
+                {
+                    mtemp = this.theMonsters.get(k);
+                    temp.travelMonster(direction, this, mtemp);
+                    return;
+                }
+            }
+        }
+    }
+
+    public Monster checkForMonster(String name)
+    {
+        if(this.theMonsters.size() != 0)
+        {
+            Monster temp;
+            for(int i = 0; i < this.theMonsters.size(); i++)
+            {
+                temp = this.theMonsters.get(i);
+                if(temp.getName() == name)
+                {
+                    return temp;
+                }
+            }
+        }
+        return null;
+    }
+
+    //this should be what we need to do, but in not sure yet how to get the monster out of the array list. 
+    //update: got this working by running the same loop as usef for the arraylist with exits 
     public boolean hasExit(String direction)
     {
         for(int i = 0; i < this.theExits.size(); i++)
@@ -88,6 +130,11 @@ public class Room
     {
         this.theMonsters.add(m);
         m.setRoom(this);
+    }
+
+    void removeMonster()
+    {
+        this.theMonsters = null;
     }
     
     public Player getPlayer()
