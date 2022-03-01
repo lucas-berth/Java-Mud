@@ -97,7 +97,7 @@ public class Room
             for(int i = 0; i < this.theMonsters.size(); i++)
             {
                 temp = this.theMonsters.get(i);
-                if(temp.getName() == name)
+                if(temp.getName().equals(name))
                 {
                     return temp;
                 }
@@ -132,11 +132,11 @@ public class Room
         m.setRoom(this);
     }
 
-    void removeMonster()
+    void removeMonster(Monster m)
     {
-        this.theMonsters = null;
+        this.theMonsters.remove(m);
     }
-    
+    //note this was clearning my array now it is just removing the monster from the array
     public Player getPlayer()
     {
         return this.currentPlayer;
@@ -146,6 +146,7 @@ public class Room
     {
         this.currentPlayer = null;
     }
+    
     
     public void addExit(Exit e)
     {

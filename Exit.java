@@ -40,13 +40,13 @@ public class Exit
         if(direction.equals(directionLeadingToDest1))
         {
             theMonsters.setRoom(this.destination1);
-            fromRoom.removeMonster();
+            fromRoom.removeMonster(theMonsters);
             this.destination1.addMonster(theMonsters);
         }
         else if(direction.equals(directionLeadingToDest2))
         {
             theMonsters.setRoom(this.destination2);
-            fromRoom.removeMonster();
+            fromRoom.removeMonster(theMonsters);
             this.destination2.addMonster(theMonsters);
         }
     }
