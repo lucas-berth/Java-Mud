@@ -19,35 +19,39 @@ public class Exit
         
     }
 
-    public void travelInDirection(String direction, Room fromRoom, Player thePlayer)
-    {
-        if(direction.equals(directionLeadingToDest1))
-        {
-            thePlayer.setRoom(this.destination1);
-            fromRoom.removePlayer();
-            this.destination1.addPlayer(thePlayer);
-        }
-        else if(direction.equals(directionLeadingToDest2))
-        {
-            thePlayer.setRoom(this.destination2);
-            fromRoom.removePlayer();
-            this.destination2.addPlayer(thePlayer);
-        }
-    }
     //same thing as above except this is used to move the monster
-    public void travelMonster(String direction, Room fromRoom, Monster theMonsters)
+    //Litmans adjusted version
+    public void travelInDirection(String direction, Room fromRoom, Inhabitant theInhabitant)
     {
         if(direction.equals(directionLeadingToDest1))
         {
-            theMonsters.setRoom(this.destination1);
-            fromRoom.removeMonster(theMonsters);
-            this.destination1.addMonster(theMonsters);
+            theInhabitant.setRoom(this.destination1);
+            if(theInhabitant instanceof Player)
+            {
+                fromRoom.removePlayer();
+                this.destination1.addPlayer((Player)theInhabitant);
+            }
+            else
+            {
+                fromRoom.removeMonster((Monster)theInhabitant);
+                this.destination1.addMonster((Monster)theInhabitant);
+            }
+            
+            
         }
         else if(direction.equals(directionLeadingToDest2))
         {
-            theMonsters.setRoom(this.destination2);
-            fromRoom.removeMonster(theMonsters);
-            this.destination2.addMonster(theMonsters);
+            theInhabitant.setRoom(this.destination1);
+            if(theInhabitant instanceof Player)
+            {
+                fromRoom.removePlayer();
+                this.destination2.addPlayer((Player)theInhabitant);
+            }
+            else
+            {
+                fromRoom.removeMonster((Monster)theInhabitant);
+                this.destination2.addMonster((Monster)theInhabitant);
+            }
         }
     }
 

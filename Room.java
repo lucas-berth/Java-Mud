@@ -25,7 +25,7 @@ public class Room
         String alsoHereOutput = "";
         if(this.currentPlayer != null)
         {
-            alsoHereOutput = this.currentPlayer.getName();
+            alsoHereOutput = this.currentPlayer.getInhabitantName();
         }
 
         //what monsters are in this room???
@@ -33,11 +33,11 @@ public class Room
         {
             if(alsoHereOutput.length() > 0)
             {
-                alsoHereOutput = alsoHereOutput + ", " + this.theMonsters.get(i).getName();
+                alsoHereOutput = alsoHereOutput + ", " + this.theMonsters.get(i).getInhabitantName();
             }
             else
             {
-                alsoHereOutput = this.theMonsters.get(i).getName();
+                alsoHereOutput = this.theMonsters.get(i).getInhabitantName();
             }
         }
 
@@ -54,20 +54,8 @@ public class Room
        System.out.println(exitDirections);
     }
     
-    public void takeExit(String direction)
-    {
-        Exit temp;
-        for(int i = 0; i < this.theExits.size(); i++)
-        {
-            temp = this.theExits.get(i);
-            if(temp.getDirectionStringLeadingAwayFromRoom(this).equals(direction))
-            {
-                temp.travelInDirection(direction, this, this.currentPlayer);
-                return;
-            }
-        }
-    }
-
+    //another version of takeExit
+    /*
     public void throwMonster(String direction)
     {
         Exit temp;
@@ -82,9 +70,25 @@ public class Room
                 for(int k = 0; k < this.theMonsters.size(); k++)
                 {
                     mtemp = this.theMonsters.get(k);
-                    temp.travelMonster(direction, this, mtemp);
+                    temp.travelInDirection(direction, this, mtemp);
                     return;
                 }
+            }
+        }
+    }
+
+    */
+    //Litmans answer
+    public void takeExit(String direction, Inhabitant theInhabitant)
+    {
+        Exit temp;
+        for(int i = 0; i < this.theExits.size(); i++)
+        {
+            temp = this.theExits.get(i);
+            if(temp.getDirectionStringLeadingAwayFromRoom(this).equals(direction))
+            {
+                temp.travelInDirection(direction, this, theInhabitant);
+                return;
             }
         }
     }
@@ -105,6 +109,24 @@ public class Room
         }
         return null;
     }
+
+    //Litman's answer which is very similar to checkForMonster
+    public Monster getMonsterGivenName(String name) throws Exception
+    {
+        for(int i = 0; i < this.theMonsters.size(); i++)
+        {
+            Monster temp = this.theMonsters.get(i);
+            if(temp.getName().equals(name))
+            {
+                return temp;
+            }
+        }
+        //If I am here, I did not find a monster with that name!!!
+        throw new Exception("Monster with " + name + " not found!!!");
+    }
+
+
+
 
     //this should be what we need to do, but in not sure yet how to get the monster out of the array list. 
     //update: got this working by running the same loop as usef for the arraylist with exits 
@@ -132,11 +154,13 @@ public class Room
         m.setRoom(this);
     }
 
+    //same as Litman's answer 
     void removeMonster(Monster m)
     {
         this.theMonsters.remove(m);
     }
     //note this was clearning my array now it is just removing the monster from the array
+
     public Player getPlayer()
     {
         return this.currentPlayer;

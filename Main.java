@@ -14,6 +14,7 @@ public class Main
 	    Room theEntrance = Main.getRoomGivenName("Entrance", theRooms);
 	    theEntrance.addPlayer(thePlayer);
 		theEntrance.addMonster(theRat);
+		theRat.start();
 	    thePlayer.play();
         
 	}

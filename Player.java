@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import javax.lang.model.util.ElementScanner14;
 public class Player extends Inhabitant
 {
     public Player(String name)
@@ -28,6 +30,7 @@ public class Player extends Inhabitant
                 String who = input.nextLine();
                 System.out.println("Where do you want to throw " + who + "? ");
                 String where = input.nextLine();
+                /*
                 if(currentRoom.hasExit(where) == true)
                 {
                     Monster temp = currentRoom.checkForMonster(who);
@@ -36,15 +39,40 @@ public class Player extends Inhabitant
                     {
                         currentRoom.throwMonster(where);
                         this.lookAround();
-                        System.out.println("About to throw..." + who + " through the exit to the: " + where + "!!!");
+                        ;
                     }
                     else
                     {
                         System.out.println("No Monsters Here by that name!!!!");
                     }
                 }
+                */
+
+                //Litmans answer
+                ///*
+                try
+                {
+                    Monster theMonster = this.currentRoom.getMonsterGivenName(who);
+                    if(this.currentRoom.hasExit(where))
+                    {
+                        this.currentRoom.takeExit(where, theMonster);
+                        System.out.println(who + " has been thrown to the: " + where);
+                    }
+                    
+                    else
+                    {
+                        System.err.println(who + " bounces off the " + where + "wall");
+                    }
+                }
+                catch(Exception e)
+                {
+                    System.err.println(e);
+                    this.lookAround();
+                }
+               // */
                 
-                
+                //this is where the program is left off, I will update with Litman's code once its fixed up and update 
+                //friday is when we do multithreading. 
                 
                 
                
@@ -63,7 +91,7 @@ public class Player extends Inhabitant
                 //so line holds something like "north"
                 if(this.currentRoom.hasExit(line))
                 {
-                    this.currentRoom.takeExit(line);
+                    this.currentRoom.takeExit(line, this);
                     this.lookAround();
                     
                 }

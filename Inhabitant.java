@@ -1,4 +1,4 @@
-abstract public class Inhabitant extends Object
+abstract public class Inhabitant extends Thread
 {
     protected String name;
     protected Room currentRoom;
@@ -17,29 +17,12 @@ abstract public class Inhabitant extends Object
         this.currentRoom = r;
     }
 
-    public String getName()
+    public String getInhabitantName()
     {
         return this.name;
     }
 
-    
-    /*
-    public void throwMonster(String direction)
-    {
-        Exit temp;
-        Room tempr;
-        tempr = currentRoom;
-        for(int i = 0; i < tempr.theExits.size(); i++)
-        {
-            temp = currentRoom.theExits.get(i);
-            if(temp.getDirectionStringLeadingAwayFromRoom(tempr).equals(direction))
-            {
-                temp.travelMonster(direction, currentRoom, this);
-                return;
-            }
-        }
-    }
-    */
+
 
     
 }
